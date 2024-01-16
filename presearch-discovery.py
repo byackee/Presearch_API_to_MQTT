@@ -19,7 +19,8 @@ client_id = 'presearch'
 username = 'mqtt'
 password = 'xxxxxx'
 ############### MODIFY VARIABLE END################
- 
+
+token = sys.argv[1]
 def connect_mqtt():
     def on_connect(client, userdata, flags, rc):
         if rc == 0:
