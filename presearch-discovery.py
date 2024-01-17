@@ -17,31 +17,31 @@ topic = "presearch_nodes"
 # Generate a Client ID with the publish prefix.
 client_id = 'presearch'
 username = 'mqtt'
-password = 'xxxx'
+password = 'xxxxx'
 ############### MODIFY VARIABLE END################
 
 token = sys.argv[1] 
 #liste pour définir les devices_class & les unit_of_measurement pour chaque type
 liste = {
- "connected":  ["connectivity", "none"],
- "blocked":  ["problem", "none"],
- "in_current_state_since": ["none", "timestamp"],
- "minutes_in_current_state": ["none", "min"],
- "total_requests" : ["none", "none"],
- "successful_requests": ["none", "none"],
- "avg_success_rate": ["none", "none"],
- "avg_success_rate_score": ["none", "none"],
- "avg_reliability_score": ["none", "none"],
- "avg_staked_capacity_percent": ["", "%"],
- "avg_utilization_percent": ["none", "%"],
- "total_pre_earned": ["none", "none"],
- "rewardable_requests": ["none", "none"]
+ "connected": ["connectivity", "\u200B"],
+ "blocked": ["problem", "\u200B"],
+ "in_current_state_since": ["\u200B", "timestamp"],
+ "minutes_in_current_state": ["\u200B", "min"],
+ "total_requests" : ["\u200B", "\u200B"],
+ "successful_requests": ["\u200B", "\u200B"],
+ "avg_success_rate": ["\u200B", "\u200B"],
+ "avg_success_rate_score": ["\u200B", "\u200B"],
+ "avg_reliability_score": ["\u200B", "\u200B"],
+ "avg_staked_capacity_percent": ["\u200B", "%"],
+ "avg_utilization_percent": ["\u200B", "%"],
+ "total_pre_earned": ["\u200B", "\u200B"],
+ "rewardable_requests": ["\u200B", "\u200B"]
  }
 
-
+token = sys.argv[1]
 
 def connect_mqtt():
-   def on_connect(client, userdata, flags, rc):
+    def on_connect(client, userdata, flags, rc):
         if rc == 0:
             print("Connected to MQTT Broker!")
         else:
@@ -77,9 +77,9 @@ def parse(client):
                 if x == i:
                     #Payload for status connection
                     discoveryTopic = f"homeassistant/binary_sensor/presearch/{node_id}_{i}/config";
-                    payload = '{"unique_id": "' + f"{node_id}_{i}" + '" , ' + '"name": "' + node["meta"]["description"] + '.' + i + '", "stat_t": "' + f"presearch_nodes/{node_id}/status/{i}" +'", ' + '"devices_class": "' + valeurs[0] + '", "payload_on": true, "payload_off": false, "device": {"identifiers": ["'+ f"{g_deviceModel}_{node_id}"'"], "name": "' + node["meta"]["description"] + '", "model": "' + f"{g_deviceModel}" + '", "manufacturer": "' + f"{g_manufacturer}" + '", "sw_version": "' + f"{g_swVersion}" '+" }}'
+                    payload = '{"unique_id": "' + f"{node_id}_{i}" + '" , ' + '"name": "' + node["meta"]["description"] + '.' + i + '", "stat_t": "' + f"presearch_nodes/{node_id}/status/{i}" +'", ' + '"device_class": "' + valeurs[0] + '", "payload_on": true, "payload_off": false, "device": {"identifiers": ["'+ f"{g_deviceModel}_{node_id}"'"], "name": "' + node["meta"]["description"] + '", "model": "' + f"{g_deviceModel}" + '", "manufacturer": "' + f"{g_manufacturer}" + '", "sw_version": "' + f"{g_swVersion}" '+" }}'
                     client.publish(discoveryTopic,payload,0,retain=True)
-                    #print(payload)
+                    print(payload)
 
         #boucle pour stats
         data = ["in_current_state_since", "minutes_in_current_state", "total_requests", "successful_requests", "avg_success_rate", "avg_success_rate_score", "avg_reliability_score", "avg_staked_capacity_percent", "avg_utilization_percent", "total_pre_earned", "rewardable_requests"]
@@ -88,9 +88,9 @@ def parse(client):
                 if x == s:
                     #Payload for stats/successful_requests
                     discoveryTopic = f"homeassistant/sensor/presearch/{node_id}_{s}/config";
-                    payload = '{"unique_id": "' + f"{node_id}_{s}" + '" , ' + '"name": "' + node["meta"]["description"] + '.' + s + '", ' +' "stat_t": "' + f"presearch_nodes/{node_id}/stats/{s}" +'", ' + '"unit_of_measurement": "' + valeurs[0] + '", "device": {"identifiers": ["' + f"{g_deviceModel}_{node_id}"'"], "name": "' + node["meta"]["description"] + '", "model": "' + f"{g_deviceModel}" + '", "manufacturer": "' + f"{g_manufacturer}" + '", "sw_version": "' + f"{g_swVersion}" + '" }}'
+                    payload = '{"unique_id": "' + f"{node_id}_{s}" + '" , ' + '"name": "' + node["meta"]["description"] + '.' + s + '", ' +' "stat_t": "' + f"presearch_nodes/{node_id}/stats/{s}" +'", ' + '"unit_of_measurement": "' + valeurs[1] + '", "device": {"identifiers": ["' + f"{g_deviceModel}_{node_id}"'"], "name": "' + node["meta"]["description"] + '", "model": "' + f"{g_deviceModel}" + '", "manufacturer": "' + f"{g_manufacturer}" + '", "sw_version": "' + f"{g_swVersion}" + '" }}'
                     client.publish(discoveryTopic,payload,0,retain=True)
-                    #print(payload)
+                    print(payload)
  
  
 def run():

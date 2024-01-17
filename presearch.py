@@ -17,7 +17,7 @@ topic = "presearch_nodes"
 # Generate a Client ID with the publish prefix.
 client_id = 'presearch'
 username = 'mqtt'
-password = 'xxxxxx'
+password = 'xxxx'
 ############### MODIFY VARIABLE END################
 
 token = sys.argv[1]
