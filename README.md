@@ -29,7 +29,7 @@ This codebase is inspired by
   Similar service by [Zibby](https://github.com/Zibby)
 
 ## Todo
-
+- [x] Functional code
 - [ ] Cleanup and add more docs on complete installation
 - [ ] Improve/Optimize code
 - [ ] Add more features & personalization
