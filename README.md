@@ -36,5 +36,7 @@ This codebase is inspired by
 - [ ] Add more features & personalization
 
 ## Donation
-  [![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://www.paypal.me/byackee/)
-  Eth wallet: 0x7F57f6ad25c501deb2fcaCA863264F593efe31d8
+  [Support via PayPal](https://www.paypal.me/byackee/)
+  
+  Eth: 0x7F57f6ad25c501deb2fcaCA863264F593efe31d8
+  Flux: t1U3ubvVNhCHFkzGYZV52huyE4a1MGh3ymE
