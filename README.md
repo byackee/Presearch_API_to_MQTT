@@ -36,6 +36,7 @@ This codebase is inspired by
 - [ ] Cleanup and add more docs on complete installation
 - [ ] Improve/Optimize code
 - [ ] Add more features & personalization
+- [ ] Easy install by HACS
 
 ## Donation
   [Support via PayPal](https://www.paypal.me/byackee/)
