@@ -38,8 +38,6 @@ liste = {
  "rewardable_requests": ["\u200B", "\u200B"]
  }
 
-token = sys.argv[1]
-
 def connect_mqtt():
     def on_connect(client, userdata, flags, rc):
         if rc == 0:
@@ -55,13 +53,14 @@ def connect_mqtt():
  
 def parse(client): 
     url = f"https://nodes.presearch.org/api/nodes/status/{token}"
+    print(f"Requesting {url=}")
     res = get(url=url,  verify=False)
     data = res.json()
     nodes = data.pop("nodes", {})
     if res.status_code != 200:
         print(f"Error {data}")
  
-    g_deviceModel = "Presearch";                           
+    g_deviceModel = "Presearch";                          
     g_swVersion = "0.9";                                     
     g_manufacturer = "Byackee";                              
     g_deviceName = "Presearch";
@@ -70,29 +69,17 @@ def parse(client):
     for node_pub, node in nodes.items():
         node_id = uuid.uuid5(uuid.NAMESPACE_DNS, node_pub).hex.upper()
 
-        #boucle pour binary_sensor
-        data = ["connected", "blocked"]
-        for i in data:
-            for x, valeurs in liste.items():
-                if x == i:
-                    #Payload for status connection
-                    discoveryTopic = f"homeassistant/binary_sensor/presearch/{node_id}_{i}/config";
-                    payload = '{"unique_id": "' + f"{node_id}_{i}" + '" , ' + '"name": "' + node["meta"]["description"] + '.' + i + '", "stat_t": "' + f"presearch_nodes/{node_id}/status/{i}" +'", ' + '"device_class": "' + valeurs[0] + '", "payload_on": true, "payload_off": false, "device": {"identifiers": ["'+ f"{g_deviceModel}_{node_id}"'"], "name": "' + node["meta"]["description"] + '", "model": "' + f"{g_deviceModel}" + '", "manufacturer": "' + f"{g_manufacturer}" + '", "sw_version": "' + f"{g_swVersion}" '+" }}'
-                    client.publish(discoveryTopic,payload,0,retain=True)
-                    print(payload)
+        for x, valeurs in liste.items():
+            if x == ["connected", "blocked"]: #binary_sensor
+                discoveryTopic = f"homeassistant/binary_sensor/presearch/{node_id}_{x}/config";
+                payload = '{"unique_id": "' + f"{node_id}_{x}" + '" , ' + '"name": "' + node["meta"]["description"] + '.' + x + '", "stat_t": "' + f"presearch_nodes/{node_id}/status/{x}" +'", ' + '"device_class": "' + valeurs[0] + '", "payload_on": true, "payload_off": false, "device": {"identifiers": ["'+ f"{g_deviceModel}_{node_id}"'"], "name": "' + node["meta"]["description"] + '", "model": "' + f"{g_deviceModel}" + '", "manufacturer": "' + f"{g_manufacturer}" + '", "sw_version": "' + f"{g_swVersion}" '+" }}'
 
-        #boucle pour stats
-        data = ["in_current_state_since", "minutes_in_current_state", "total_requests", "successful_requests", "avg_success_rate", "avg_success_rate_score", "avg_reliability_score", "avg_staked_capacity_percent", "avg_utilization_percent", "total_pre_earned", "rewardable_requests"]
-        for s in data:
-            for x, valeurs in liste.items():
-                if x == s:
-                    #Payload for stats/successful_requests
-                    discoveryTopic = f"homeassistant/sensor/presearch/{node_id}_{s}/config";
-                    payload = '{"unique_id": "' + f"{node_id}_{s}" + '" , ' + '"name": "' + node["meta"]["description"] + '.' + s + '", ' +' "stat_t": "' + f"presearch_nodes/{node_id}/stats/{s}" +'", ' + '"unit_of_measurement": "' + valeurs[1] + '", "device": {"identifiers": ["' + f"{g_deviceModel}_{node_id}"'"], "name": "' + node["meta"]["description"] + '", "model": "' + f"{g_deviceModel}" + '", "manufacturer": "' + f"{g_manufacturer}" + '", "sw_version": "' + f"{g_swVersion}" + '" }}'
-                    client.publish(discoveryTopic,payload,0,retain=True)
-                    print(payload)
- 
- 
+            else:
+                discoveryTopic = f"homeassistant/sensor/presearch/{node_id}_{x}/config";
+                payload = '{"unique_id": "' + f"{node_id}_{x}" + '" , ' + '"name": "' + node["meta"]["description"] + '.' + x + '", ' +' "stat_t": "' + f"presearch_nodes/{node_id}/stats/{x}" +'", ' + '"unit_of_measurement": "' + valeurs[1] + '", "device": {"identifiers": ["' + f"{g_deviceModel}_{node_id}"'"], "name": "' + node["meta"]["description"] + '", "model": "' + f"{g_deviceModel}" + '", "manufacturer": "' + f"{g_manufacturer}" + '", "sw_version": "' + f"{g_swVersion}" + '" }}'
+
+            client.publish(discoveryTopic,payload,0,retain=True)
+
 def run():
     client = connect_mqtt()
     parse(client)
