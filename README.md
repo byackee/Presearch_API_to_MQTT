@@ -1,9 +1,10 @@
 # Presearch_API_to_MQTT
 Send Presearch API to MQTT (with Home Assistant discovery)
 
-Presearch API Request Rate Limits:
-  * Requests without stats (default, stats=false): Up to 4 requests per minute
-  * Requests with stats (stats=true): Up to 4 requests per hour
+# Limitation
+  Presearch API Request Rate Limits:
+    * Requests without stats (default, stats=false): Up to 4 requests per minute
+    * Requests with stats (stats=true): Up to 4 requests per hour
 
 ## Requirements:
   * Python3 & pip3
@@ -15,7 +16,7 @@ Presearch API Request Rate Limits:
   3) Create cron (every minute) to run scrupt "python3 presearch.py your_api_token
 
 ## How its work:
-With your cron the script give the main data from presearch API and every 15 minutes the script add stats data (limited to 4 requests per hour) and send all to your MQTT broker.
+With your cron the script give the main data from presearch API and every 15 minutes add stats data (limited to 4 requests per hour) and send all to your MQTT broker.
 
 ## Credits
 
@@ -33,3 +34,7 @@ This codebase is inspired by
 - [ ] Cleanup and add more docs on complete installation
 - [ ] Improve/Optimize code
 - [ ] Add more features & personalization
+
+## Donation
+  [![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://www.paypal.me/byackee/)
+  Eth wallet: 0x7F57f6ad25c501deb2fcaCA863264F593efe31d8
