@@ -20,7 +20,7 @@ With your cron the script give the main data from presearch API and every 15 min
 ## Credits
 
 This codebase is inspired by
-- [A prometheus exporter for presearch.io nodes written in go](https://github.com/b-n-space/presearch-exporter)
+- [presearch-exporter](https://github.com/b-n-space/presearch-exporter)
  Similar service by [Bᴺ Space]([https://github.com/Zibby](https://github.com/b-n-space))
 - [How to monitor your PRESEARCH nodes with prometheus and grafana ?](https://libremaster.com/presearch-node-grafana/)
   Amazing guide by [Christophe T.](https://libremaster.com/contact/) on how to implement Prometheus/Grafana monitoring
