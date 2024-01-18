@@ -1,6 +1,8 @@
 # Presearch_API_to_MQTT
 Send Presearch API to MQTT (with Home Assistant discovery)
 
+<img width="502" alt="image" src="https://github.com/byackee/Presearch_API_to_MQTT/assets/4707496/32633fe9-bf5c-4500-8c5d-5c7f59a60b56">       <img width="420" alt="image-1" src="https://github.com/byackee/Presearch_API_to_MQTT/assets/4707496/28aff644-e5b9-4c56-938f-d2fee90829bd">
+
 # Limitation
   Presearch API Request Rate Limits:
     * Requests without stats (default, stats=false): Up to 4 requests per minute
