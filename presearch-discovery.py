@@ -70,7 +70,7 @@ def parse(client):
         node_id = uuid.uuid5(uuid.NAMESPACE_DNS, node_pub).hex.upper()
 
         for x, valeurs in liste.items():
-            if x == ["connected", "blocked"]: #binary_sensor
+            if x in ["connected", "blocked"]: #binary_sensor
                 discoveryTopic = f"homeassistant/binary_sensor/presearch/{node_id}_{x}/config";
                 payload = '{"unique_id": "' + f"{node_id}_{x}" + '" , ' + '"name": "' + node["meta"]["description"] + '.' + x + '", "stat_t": "' + f"presearch_nodes/{node_id}/status/{x}" +'", ' + '"device_class": "' + valeurs[0] + '", "payload_on": true, "payload_off": false, "device": {"identifiers": ["'+ f"{g_deviceModel}_{node_id}"'"], "name": "' + node["meta"]["description"] + '", "model": "' + f"{g_deviceModel}" + '", "manufacturer": "' + f"{g_manufacturer}" + '", "sw_version": "' + f"{g_swVersion}" '+" }}'
 
